@@ -111,12 +111,19 @@ async def delete(request: Request):
 
 # 获取manager相关的所有用户信息
 @router.post("/get_info")
+
 async def get_info(request: Request):
     data = await request.json()
     manager = data.get("manager")
+    page_size = data.get("pageSize", 15)  # 默认每页15条
+    current_page = data.get("currentPage", 1)  # 默认第1页
     
     try:
-        customers = await LegymCustomer.filter(manager=manager)
+        # 计算总数
+        total_count = await LegymCustomer.filter(manager=manager).count()
+        
+        # 获取分页数据
+        customers = await LegymCustomer.filter(manager=manager).offset((current_page-1)*page_size).limit(page_size)
         
         if not customers:
             return JSONResponse(content={"message": "该管理员下没有用户"}, status_code=404)
@@ -142,6 +149,11 @@ async def get_info(request: Request):
                 "complete_day_in_week": customer.complete_day_in_week
             })
         
-        return JSONResponse(content={"customers": customers_info}, status_code=200)
+        return JSONResponse(content={
+            "customers": customers_info,
+            "total": total_count,
+            "currentPage": current_page,
+            "pageSize": page_size
+        }, status_code=200)
     except Exception as e:
         return JSONResponse(content={"message": f"获取信息失败: {str(e)}"}, status_code=400)
