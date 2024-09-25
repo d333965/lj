@@ -111,14 +111,41 @@ async def delete(request: Request):
 
 # 获取manager相关的所有用户信息
 @router.post("/get_info")
-
 async def get_info(request: Request):
     data = await request.json()
     manager = data.get("manager")
     page_size = data.get("pageSize", 15)  # 默认每页15条
     current_page = data.get("currentPage", 1)  # 默认第1页
-    
+    search_user = data.get("searchUser")  # 获取searchUser参数
+
     try:
+        if search_user:
+            # 查找特定用户
+            customer = await LegymCustomer.filter(manager=manager, username=search_user).first()
+            if not customer:
+                return JSONResponse(content={"message": "未找到指定用户"}, status_code=404)
+            
+            customer_info = {
+                "id": customer.id,
+                "create_time": customer.create_time.strftime('%Y-%m-%d %H:%M:%S'),
+                "manager": customer.manager,
+                "username": customer.username,
+                "password": customer.password,
+                "schoolName": customer.schoolName,
+                "runType": customer.runType,
+                "total_goals": customer.total_goals,
+                "day_goals": customer.day_goals,
+                "day_in_week": customer.day_in_week,
+                "rounds": customer.rounds,
+                "begin_state": customer.begin_state,
+                "runTime": customer.runTime,
+                "is_run": customer.is_run,
+                "complete_goals": customer.complete_goals,
+                "complete_day_in_week": customer.complete_day_in_week
+            }
+            
+            return JSONResponse(content={"customer": customer_info}, status_code=200)
+        
         # 计算总数
         total_count = await LegymCustomer.filter(manager=manager).count()
         
