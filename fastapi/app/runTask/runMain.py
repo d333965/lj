@@ -108,7 +108,7 @@ def run_main():
 
 if __name__ == "__main__":
     # 设置定时任务，每14分钟执行一次
-    schedule.every(14).minutes.do(run_main)
+    schedule.every(1).minutes.do(run_main)
 
     # 运行定时任务
     while True:
