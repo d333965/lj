@@ -28,19 +28,19 @@ async def process_customer(customer):
         # 检查是否完成总目标
         if customer.complete_goals >= customer.total_goals:
             await customer.delete()
-            print(f"用户 {customer.username} 已完成总目标,已从数据库中删除")
+            # 移除 print: print(f"用户 {customer.username} 已完成总目标,已从数据库中删除")
             return
         # 检查今天是否为周一
         if datetime.now().weekday() == 0:
             customer.complete_day_in_week = 0
             await customer.save()
-            print(f"用户 {customer.username} 周一重置")
+            # 移除 print: print(f"用户 {customer.username} 周一重置")
             return
         # 检查本周任务是否完成day_in_week
         if customer.complete_day_in_week >= customer.day_in_week:
             customer.is_run = True
             await customer.save()
-            print(f"用户 {customer.username} 本周任务已完成,已重置")
+            # 移除 print: print(f"用户 {customer.username} 本周任务已完成,已重置")
             return
 
         # 检查当前时间是否在跑步时间内
@@ -49,7 +49,7 @@ async def process_customer(customer):
         is_run_time = any(start <= current_hour < end for time_range in run_times for start, end in [map(int, time_range.split('~'))])
 
         if not is_run_time:
-            print(f"用户 {customer.username} 当前不在跑步时间内")
+            # 移除 print: print(f"用户 {customer.username} 当前不在跑步时间内")
             return
 
         # 登录获取信息
@@ -69,20 +69,19 @@ async def process_customer(customer):
                 customer.complete_day_in_week += 1
                 customer.is_run = True
                 await customer.save()
-                print(f"用户 {customer.username} 成功完成跑步任务")
+                # 移除 print: print(f"用户 {customer.username} 成功完成跑步任务")
                 break
             elif message == "success":
                 attempt += 1
-                print(f"用户 {customer.username} 跑步请求失败,message返回success。尝试第 {attempt} 次")
+                # 移除 print: print(f"用户 {customer.username} 跑步请求失败,message返回success。尝试第 {attempt} 次")
                 if attempt == max_attempts:
-                    print(f"用户 {customer.username} 已达到最大尝试次数,跳过此用户")
+                   break
             else:
-                print(f"用户 {customer.username} 未知错误")
+                # 移除 print: print(f"用户 {customer.username} 未知错误")
                 break
 
     except Exception as e:
-        print(f"处理用户 {customer.username} 时发生错误：{str(e)}")
-        # 可以在这里添加更多的错误处理逻辑，比如标记用户状态或发送通知
+        # 移除 print: print(f"处理用户 {customer.username} 时发生错误：{str(e)}")
         return
 
 async def main():
@@ -93,7 +92,7 @@ async def main():
         for customer in customers:
             customer.is_run = False
             await customer.save()
-            print(f"用户 {customer.username} 已重置")
+            # 移除 print: print(f"用户 {customer.username} 已重置")
     else:
         # 获取所有begin_state为True且is_run为False的用户
         customers = await LegymCustomer.filter(begin_state=True, is_run=False)
