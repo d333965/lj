@@ -123,7 +123,7 @@ async def get_info(request: Request):
         total_count = await LegymCustomer.filter(manager=manager).count()
         
         # 获取分页数据
-        customers = await LegymCustomer.filter(manager=manager).offset((current_page-1)*page_size).limit(page_size)
+        customers = await LegymCustomer.filter(manager=manager).order_by('-create_time').offset((current_page-1)*page_size).limit(page_size)
         
         if not customers:
             return JSONResponse(content={"message": "该管理员下没有用户"}, status_code=404)
