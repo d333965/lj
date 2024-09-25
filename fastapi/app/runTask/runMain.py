@@ -59,7 +59,7 @@ async def process_customer(customer):
         semesterId = getsemesterId(accessToken, schoolId)
 
         # 执行跑步任务
-        max_attempts = 11
+        max_attempts = 15
         attempt = 0
         while attempt < max_attempts:
             message = runTask(customer.day_goals, accessToken, semesterId, routine_line, customer.runType, OctSecretKey)
@@ -107,8 +107,8 @@ def run_main():
     run_async(main())
 
 if __name__ == "__main__":
-    # 设置定时任务，每14分钟执行一次
-    schedule.every(1).minutes.do(run_main)
+    # 设置定时任务，每10分钟执行一次
+    schedule.every(10).minutes.do(run_main)
 
     # 运行定时任务
     while True:
