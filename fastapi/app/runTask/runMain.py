@@ -77,7 +77,7 @@ async def process_customer(customer):
                 if attempt == max_attempts:
                    break
             else:
-                # 移除 print: print(f"用户 {customer.username} 未知错误")
+                print(f"用户 {customer.username} 未知错误")
                 break
 
     except Exception as e:

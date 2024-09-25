@@ -48,6 +48,8 @@ def getRouteLine(schoolName, rounds):
     # 川北医学院
     elif schoolName == '川北医学院':
         routineLine_Data = schoolRoutes.川北医学院
+    elif schoolName == '攀枝花学院':
+        routineLine_Data = schoolRoutes.攀枝花学院
     else:
         raise ValueError("未知的学校名称")
 
