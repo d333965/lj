@@ -63,7 +63,7 @@ def runTask( day_goals, accessToken, semesterId, routine_line,runType,OctSecretK
 
         # 获取当前日期和时间，包括秒数
         current_datetime = datetime.now()
-        current_datetime = current_datetime - timedelta(minutes=random.randint(1, 40))
+        current_datetime = current_datetime - timedelta(minutes=random.randint(15, 40))
 
         # 格式化时间，包括秒数
         endtime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")

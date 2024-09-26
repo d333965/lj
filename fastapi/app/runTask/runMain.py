@@ -59,7 +59,7 @@ async def process_customer(customer):
         semesterId = getsemesterId(accessToken, schoolId)
 
         # 执行跑步任务
-        max_attempts = 15
+        max_attempts = 20
         attempt = 0
         while attempt < max_attempts:
             message = runTask(customer.day_goals, accessToken, semesterId, routine_line, customer.runType, OctSecretKey)
