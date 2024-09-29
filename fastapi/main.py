@@ -9,7 +9,7 @@ from tortoise.contrib.fastapi import register_tortoise
 from app.mysql.settings import TORTOISE_ORM
 from tortoise import Tortoise, run_async
 from app.mysql.settings import get_tortoise_config
-
+from app.router.Epay.index import router as epay_router
 app = FastAPI()
 # 注册tortoise-orm
 register_tortoise(
@@ -20,6 +20,7 @@ register_tortoise(
 # 注册路由
 app.include_router(manager_router, prefix="/api/manager")
 app.include_router(legymCustomer_router, prefix="/api/legymCustomer")
+app.include_router(epay_router, prefix="/api/epay")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
