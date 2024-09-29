@@ -96,7 +96,7 @@ class EpayCore:
     
     # 乐点验证
     def verify_score(self, score,money):
-        if score < 0:
+        if score < 200:
             return False
         elif score >= 200 and score <= 500:
             if score * 0.16 != money:
