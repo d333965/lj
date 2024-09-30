@@ -93,16 +93,14 @@ def LoginGetInfo(userName, password):
 
     # 12. 定义请求头
     headers = {
-        "Host": "cpes.legym.cn",
         "charset": "UTF-8",
         "content-type": "application/json",
-        "accept-encoding": "gzip",
-        "user-agent": "okhttp/4.8.1"
     }
-
-    # 13. 发送 POST 请求
-    response = requests.post(url, headers=headers, json=output)
-
+    try:
+        # 13. 发送 POST 请求
+        response = requests.post(url, headers=headers, json=output, timeout=5)
+    except Exception as e:
+        return "错误"
     # 14. 检查响应状态码
     if response.status_code == 200:
         # 15. 获取返回的 "t" 和 "pyd"
@@ -131,7 +129,7 @@ def LoginGetInfo(userName, password):
         userId = data['id']
         return accessToken, schoolId, userId
     else:
-        return "账号密码错误"
+        return "错误"
 
 
 #获取学期ID
