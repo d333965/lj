@@ -96,11 +96,7 @@ def LoginGetInfo(userName, password):
         "charset": "UTF-8",
         "content-type": "application/json",
     }
-    try:
-        # 13. 发送 POST 请求
-        response = requests.post(url, headers=headers, json=output, timeout=5)
-    except Exception as e:
-        return "错误"
+    response = requests.post(url, headers=headers, json=output, timeout=5)
     # 14. 检查响应状态码
     if response.status_code == 200:
         # 15. 获取返回的 "t" 和 "pyd"
