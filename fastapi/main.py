@@ -11,10 +11,13 @@ from tortoise import Tortoise, run_async
 from app.mysql.settings import get_tortoise_config
 from app.router.Epay.index import router as epay_router
 app = FastAPI()
-# 注册tortoise-orm
+
+# 在这里注册Tortoise
 register_tortoise(
     app,
     config=TORTOISE_ORM,
+    generate_schemas=False,
+    add_exception_handlers=True,
 )
 
 # 注册路由
