@@ -32,11 +32,6 @@ app.add_middleware(
     allow_headers=["*"],  # 允许所有头部
 )
 
-async def init():
-    await Tortoise.init(config=get_tortoise_config())
-    await Tortoise.generate_schemas()
-
 if __name__ == '__main__':
     import uvicorn
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
-    run_async(init())
