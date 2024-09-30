@@ -23,11 +23,11 @@ async def create(request: Request):
     rounds = data.get("rounds")
     print(manager, username, password, runType, schoolName, runTime, total_goals, day_goals, day_in_week, rounds)
     # 验证账号密码
-    try:
-        if LoginGetInfo(username, password) == "账号密码错误":
-            return JSONResponse(content={"message": "账号密码错误"}, status_code=400)
-    except Exception as e:
-        return JSONResponse(content={"message": f"创建失败: {str(e)}"}, status_code=400)
+    # try:
+    #     if LoginGetInfo(username, password) == "账号密码错误":
+    #         return JSONResponse(content={"message": "账号密码错误"}, status_code=400)
+    # except Exception as e:
+    #     return JSONResponse(content={"message": f"创建失败: {str(e)}"}, status_code=400)
     try:
         manager_obj = await Manager.get(manager=manager)
         
