@@ -6,10 +6,10 @@ TORTOISE_ORM = {
         'default': {
             'engine': 'tortoise.backends.mysql',  # MySQL or Mariadb
             'credentials': {
-                'host': '127.0.0.1',
+                'host': 'localhost',
                 'port': '3306',
                 'user': 'root',
-                'password': '333965lq',
+                'password': '333965lq',  # 请确保这个密码是正确的
                 'database': 'legym',
                 'minsize': 1,
                 'maxsize': 5,

@@ -25,7 +25,7 @@ async def create(request: Request):
     # 验证账号密码
     try:
         if LoginGetInfo(username, password) == "错误":
-            return JSONResponse(content={"message": "账号密码错误"}, status_code=407)
+            return JSONResponse(content={"message": "账号密码错误"}, status_code=400)
     except Exception as e:
         return JSONResponse(content={"message": f"创建失败: {str(e)}"}, status_code=400)
     try:
