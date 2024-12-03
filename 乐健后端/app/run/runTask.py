@@ -44,7 +44,7 @@ def runTask( day_goals, accessToken, semesterId, routine_line,runType,OctSecretK
         # 创建包含选项的列表
         selected_option = "Mate 40 Pro"
         random_number = day_goals + round(random.uniform(0, 0.2), 4)
-        random_number_avePace = random.randint(500000, 580000) #改配速7`30~8`20
+        random_number_avePace = random.randint(430000, 520000) #改配速7`30~8`50
         result = random_number * random_number_avePace  # 相乘
         random_number_keepTime = int(result) // 1000  # 取千位以上的数值
         random_calorie = random.randint(90, 130)
@@ -62,7 +62,7 @@ def runTask( day_goals, accessToken, semesterId, routine_line,runType,OctSecretK
 
         # 获取当前日期和时间，包括秒数
         current_datetime = datetime.now()
-        current_datetime = current_datetime - timedelta(days=n,minutes=random.randint(10,45))  # 补跑前面第几天的
+        current_datetime = current_datetime - timedelta(days=n,minutes=random.randint(5,45))  # 补跑前面第几天的
 
         # 格式化时间，包括秒数
         endtime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")

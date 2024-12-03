@@ -11,22 +11,66 @@
     </div>
     <div class="user-list">
       <el-table :data="customers" stripe>
-        <el-table-column prop="manager" label="管理员" />
-        <el-table-column prop="create_time" label="创建时间" width="170">
+        <el-table-column prop="manager" label="管理员">
           <template #default="scope">
-            {{ formatTime(scope.row.create_time) }}
+            <span class="copyable">{{ scope.row.manager }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="username" label="用户名" width="120"/>
-        <el-table-column prop="password" label="密码" width="120"/>
-        <el-table-column prop="schoolName" label="学校" />
-        <el-table-column prop="runType" label="跑步类型" />
-        <el-table-column prop="runTime" label="跑步时间" />
-        <el-table-column prop="day_goals" label="每日目标(km)" />
-        <el-table-column prop="day_in_week" label="每周目标(天)" />
-        <el-table-column prop="complete_day_in_week" label="已完成(天)" />
-        <el-table-column prop="total_goals" label="总目标(km)" />
-        <el-table-column prop="complete_goals" label="已完成(km)" />
+        <el-table-column prop="create_time" label="创建时间" width="170">
+          <template #default="scope">
+            <span class="copyable">{{ formatTime(scope.row.create_time) }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="username" label="用户名" width="120">
+          <template #default="scope">
+            <span class="copyable">{{ scope.row.username }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="password" label="密码" width="120">
+          <template #default="scope">
+            <span class="copyable">{{ scope.row.password }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="schoolName" label="学校">
+          <template #default="scope">
+            <span class="copyable">{{ scope.row.schoolName }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="runType" label="跑步类型">
+          <template #default="scope">
+            <span class="copyable">{{ scope.row.runType }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="runTime" label="跑步时间">
+          <template #default="scope">
+            <span class="copyable">{{ scope.row.runTime }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="day_goals" label="每日目标(km)">
+          <template #default="scope">
+            <span class="copyable">{{ scope.row.day_goals }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="day_in_week" label="每周目标(天)">
+          <template #default="scope">
+            <span class="copyable">{{ scope.row.day_in_week }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="complete_day_in_week" label="已完成(天)">
+          <template #default="scope">
+            <span class="copyable">{{ scope.row.complete_day_in_week }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="total_goals" label="总目标(km)">
+          <template #default="scope">
+            <span class="copyable">{{ scope.row.total_goals }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="complete_goals" label="已完成(km)">
+          <template #default="scope">
+            <span class="copyable">{{ scope.row.complete_goals }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="跑步状态" width="100">
           <template #default="scope">
             <el-tag :type="scope.row.is_run ? 'success' : 'info'">
@@ -235,5 +279,12 @@ const formatTime = (time) => {
 .search-input {
   width: 200px;
   margin-right: 10px;
+}
+
+.copyable {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
 }
 </style>

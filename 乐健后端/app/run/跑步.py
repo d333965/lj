@@ -105,7 +105,10 @@ async def main():
     # 不在01:00~06:00之间，则开始跑步
     else:
         for customer in customers:
-            message = await start_run(customer)
+            try:
+                message = await start_run(customer)
+            except:
+                continue
             # 完成目标或者不在跑步时间
             if message == "完成目标" or message == "不在跑步时间" or message == "登录失败" or message == "路线失败":
                 continue
